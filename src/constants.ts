@@ -3,6 +3,7 @@ export const characters = {
   Vika: "Виктория",
   Alex: "Алекс",
   Host: "Ведущий",
+  Host2: "Ведущий",
   AlexNoName: "Мужчина",
   Representative: "Представитель НИИ",
   Jury: "Жюри",

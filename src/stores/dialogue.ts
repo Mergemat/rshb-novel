@@ -113,6 +113,10 @@ export const createDialogueStore = (initState: DialogueState) => {
               current: state.chapter.current + 1,
               collection: undefined,
             },
+            section: {
+              ...state.section,
+              current: 0,
+            },
             messages: {
               ...state.messages,
               count: 0,
