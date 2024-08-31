@@ -1,4 +1,6 @@
 import { type DialogueMessage, type Section } from "~/types";
+import { raiseHand } from "./raisehand";
+import { afterSession } from "./after-session";
 
 const konkurs: DialogueMessage[] = [
   {
@@ -66,6 +68,29 @@ const konkursDialogue: DialogueMessage[] = [
   },
 ];
 
+const rshb: DialogueMessage[] = [
+  {
+    character: "Evgeny",
+    text: "Участники свободно перемещаются, обсуждая проекты. Многие подходили поздравить нас, но и без хмурых молчаливых взглядов в нашу сторону не обошлось.",
+    type: "internal",
+  },
+  {
+    character: "Evgeny",
+    text: "В углу зала была организована площадка для экспертной сессии. Сейчас выступает Наталья - приятная темноволосая девушка, представляющая Россельхозбанк. Она активно жестикулирует, рассказывая о важности экспертной поддержки для начинающих стартапов.",
+    type: "internal",
+  },
+  {
+    character: "Evgeny",
+    text: "Наталья завершает свою презентацию на слайде о возможностях, которые Россельхозбанк предлагает стартапам. Она делает паузу, осматривая аудиторию, и с улыбкой спрашивает:",
+    type: "internal",
+  },
+  {
+    character: "Natalia",
+    text: "Интересно, а есть ли здесь агротех стартапы? Обычно их не так много в Москве, особенно студенческих.",
+    type: "dialogue",
+  },
+];
+
 export const chapter4: Section[] = [
   {
     type: "dialogue",
@@ -76,5 +101,24 @@ export const chapter4: Section[] = [
     type: "dialogue",
     environment: "startup",
     dialogue: konkursDialogue,
+  },
+  {
+    type: "dialogue",
+    environment: "startup",
+    dialogue: rshb,
+  },
+  {
+    type: "choice",
+    text: "Поднять руку?",
+    options: [
+      {
+        text: "Поднять",
+        sections: raiseHand,
+      },
+      {
+        text: "Подойти после сессии",
+        sections: afterSession,
+      },
+    ],
   },
 ];
