@@ -2,6 +2,7 @@ export type DialogueMessage = {
   character: string;
   text: string;
   type: "internal" | "dialogue" | "gameover";
+  endOfChapter?: boolean;
 };
 
 export type DialogueSection = {

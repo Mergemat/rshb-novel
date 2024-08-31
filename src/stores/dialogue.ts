@@ -11,9 +11,9 @@ export type DialogueState = {
   text: string;
   status: "active" | "gameover";
   type: "internal" | "dialogue" | "gameover";
+  isNewChapter: boolean;
   chapter: {
     current: number;
-    sections: number;
     collection?: Section[];
   };
   section: {
@@ -37,21 +37,21 @@ export type DialogueState = {
 export type DialogueActions = {
   nextStep: () => void;
   previousStep: () => void;
-  nextChapter: () => void;
   makeChoice: (collection: Section[]) => void;
   reset: () => void;
+  continueChapter: () => void;
 };
 
 export type DialogueStore = DialogueState & DialogueActions;
 
 export const initialDialogueStore = (): DialogueState => ({
   text: (chapters["1"][0]! as DialogueSection).dialogue[0]!.text,
+  isNewChapter: true,
   status: "active",
   character: "Evgeny-school",
   type: "internal",
   chapter: {
     current: 1,
-    sections: 3,
   },
   section: {
     current: 0,
@@ -59,7 +59,7 @@ export const initialDialogueStore = (): DialogueState => ({
   },
   messages: {
     current: (chapters["1"][0]! as DialogueSection).dialogue,
-    count: 0,
+    count: -1,
   },
   choice: {
     active: false,
@@ -99,7 +99,17 @@ export const createDialogueStore = (initState: DialogueState) => {
 
         const sectionMessages = chapterSection?.dialogue;
 
-        const dialogue = sectionMessages![messageCount]!;
+        if (
+          !sectionMessages ||
+          sectionMessages[messageCount - 1]?.endOfChapter
+        ) {
+          return {
+            isNewChapter: true,
+            chapter: { ...state.chapter, current: state.chapter.current + 1 },
+          };
+        }
+
+        const dialogue = sectionMessages[messageCount]!;
 
         console.log({
           chapter: state.chapter.current,
@@ -119,18 +129,13 @@ export const createDialogueStore = (initState: DialogueState) => {
             environment: chapterSection!.environment,
           },
           messages: {
-            current: sectionMessages!,
+            current: sectionMessages,
             count: messageCount,
           },
         };
       });
     },
     previousStep: () => set(() => ({ text: "Hello World" })),
-
-    nextChapter: () =>
-      set(() => ({
-        chapter: { ...get().chapter, current: get().chapter.current + 1 },
-      })),
 
     reset: () => set(() => initialDialogueStore()),
 
@@ -154,6 +159,10 @@ export const createDialogueStore = (initState: DialogueState) => {
           active: false,
         },
       }));
+      get().nextStep();
+    },
+    continueChapter: () => {
+      set((state) => ({ ...state, isNewChapter: false }));
       get().nextStep();
     },
   }));
