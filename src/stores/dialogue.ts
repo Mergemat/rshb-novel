@@ -88,7 +88,6 @@ export const createDialogueStore = (initState: DialogueState) => {
         }
 
         if (chapterSection?.type === "choice") {
-          console.log("choice", chapterSection.options);
           return {
             ...state,
             choice: {
@@ -105,6 +104,12 @@ export const createDialogueStore = (initState: DialogueState) => {
           !sectionMessages ||
           sectionMessages[messageCount - 1]?.endOfChapter
         ) {
+          console.log({
+            chapter: state.chapter.current,
+            section,
+            messageCount,
+            collection: state.chapter.collection,
+          });
           return {
             ...state,
             isNewChapter: true,
@@ -119,19 +124,17 @@ export const createDialogueStore = (initState: DialogueState) => {
             },
             messages: {
               ...state.messages,
+              current: (
+                chapters[(state.chapter.current + 1) as keyof typeof chapters][
+                  section
+                ]! as DialogueSection
+              ).dialogue,
               count: 0,
             },
           };
         }
 
         const dialogue = sectionMessages[messageCount]!;
-
-        console.log({
-          chapter: state.chapter.current,
-          section,
-          messageCount,
-          collection: state.chapter.collection,
-        });
 
         return {
           ...state,
