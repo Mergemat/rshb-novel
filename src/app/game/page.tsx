@@ -6,9 +6,19 @@ import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import { useDialogueStore } from "~/providers/dialogue-store-provider";
 import { type Section } from "~/types";
+import { atom, useAtomValue, useSetAtom } from "jotai";
+import { useEffect } from "react";
+
+const imageLoaded = atom(false);
 
 export default function GamePage() {
   const { section, character, type } = useDialogueStore((state) => state);
+  const setImageLoaded = useSetAtom(imageLoaded);
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [character, setImageLoaded]);
+
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-end gap-8">
       <motion.div
@@ -24,7 +34,7 @@ export default function GamePage() {
       </motion.div>
       <div
         className={cn(
-          "absolute bottom-30 inset-x-0 z-10 h-full w-full",
+          "bottom-30 absolute inset-x-0 z-10 h-full w-full",
           type === "internal" && "opacity-50",
         )}
       >
@@ -33,6 +43,7 @@ export default function GamePage() {
           alt="char"
           fill
           className="object-cover"
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
       <Controls />
@@ -44,6 +55,8 @@ const Controls = () => {
   const { text, nextStep, choice, status, ...rest } = useDialogueStore(
     (state) => state,
   );
+
+  const isImageLoaded = useAtomValue(imageLoaded);
 
   return (
     <motion.div className="z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 drop-shadow-lg backdrop-blur-xl transition-all">
@@ -67,6 +80,7 @@ const Controls = () => {
             <Button
               variant="secondary"
               className="ml-auto mr-0 p-6 text-xl"
+              disabled={!isImageLoaded}
               asChild
             >
               <Link href="/">На главную</Link>
@@ -76,6 +90,7 @@ const Controls = () => {
               onClick={nextStep}
               variant="secondary"
               className="ml-auto mr-0 p-6 text-xl"
+              disabled={!isImageLoaded}
             >
               Дальше
             </Button>
@@ -97,6 +112,7 @@ const Choice = ({
   options: { text: string; sections: Section[] }[];
 }) => {
   const { makeChoice } = useDialogueStore((state) => state);
+  const isImageLoaded = useAtomValue(imageLoaded);
 
   return (
     <motion.div
@@ -123,6 +139,7 @@ const Choice = ({
             onClick={() => makeChoice(option.sections)}
             variant="secondary"
             className="w-full py-8 text-2xl"
+            disabled={!isImageLoaded}
           >
             {option.text}
           </Button>
