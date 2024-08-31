@@ -189,7 +189,7 @@ const Dialogue = () => {
       >
         <p
           className={cn(
-            "text-sm sm:text-base tracking-wide text-white",
+            "text-base tracking-wide text-white",
             type === "internal" && "font-light italic",
           )}
         >
