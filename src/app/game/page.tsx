@@ -24,7 +24,7 @@ export default function GamePage() {
       </motion.div>
       <div
         className={cn(
-          "absolute inset-0 z-10 h-full w-full scale-90",
+          "absolute bottom-30 z-10 h-full w-full scale-90",
           type === "internal" && "opacity-50",
         )}
       >

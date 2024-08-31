@@ -19,10 +19,8 @@ export default function RootLayout({
       className={`${GeistSans.variable} dark bg-background text-foreground`}
     >
       <DialogueStoreProvider>
-        <body className="flex justify-center">
-          <main className="flex h-screen w-full max-w-xl bg-accent">
-            {children}
-          </main>
+        <body className="flex h-screen justify-center">
+          <main className="flex w-full max-w-xl bg-accent">{children}</main>
         </body>
       </DialogueStoreProvider>
     </html>
