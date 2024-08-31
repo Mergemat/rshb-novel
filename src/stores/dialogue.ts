@@ -104,8 +104,17 @@ export const createDialogueStore = (initState: DialogueState) => {
           sectionMessages[messageCount - 1]?.endOfChapter
         ) {
           return {
+            ...state,
             isNewChapter: true,
-            chapter: { ...state.chapter, current: state.chapter.current + 1 },
+            chapter: {
+              ...state.chapter,
+              current: state.chapter.current + 1,
+              collection: undefined,
+            },
+            messages: {
+              ...state.messages,
+              count: 0,
+            },
           };
         }
 

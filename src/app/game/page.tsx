@@ -26,48 +26,41 @@ export default function GamePage() {
         <Menu className="drop-shadow" />
       </Button>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isNewChapter ? (
-          <>
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.8,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.8,
-              }}
-              transition={{
-                ease: "easeOut",
-              }}
-              className="relative z-10 mb-auto mt-auto flex flex-col mx-4 items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-accent/20 px-8 py-4 drop-shadow-lg backdrop-blur-xl transition-all duration-100"
-            >
-              <h1 className="text-xl text-center font-semibold text-white">
-                Глава {chapter.current}
-              </h1>
-              <h1 className="text-lg text-center font-semibold text-white w-full">
-                {chapterNames[chapter.current as keyof typeof chapterNames]}
-              </h1>
-              <Button
-                onMouseDown={continueChapter}
-                className="mt-4 p-6 text-lg"
-              >
-                Продолжить
-              </Button>
-            </motion.div>
-          </>
-        ) : (
-          <>
-            <Canvas />
-            <Controls />
-          </>
-        )}
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              ease: "easeOut",
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            className="absolute top-1/2 z-40 mx-4 flex -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-accent/20 px-8 py-4 drop-shadow-lg backdrop-blur-xl"
+          >
+            <h1 className="text-center text-xl font-semibold text-white">
+              Глава {chapter.current}
+            </h1>
+            <h1 className="w-full text-center text-lg font-semibold text-white">
+              {chapterNames[chapter.current as keyof typeof chapterNames]}
+            </h1>
+            <Button onMouseDown={continueChapter} className="mt-4 p-6 text-lg">
+              Продолжить
+            </Button>
+          </motion.div>
+        ) : null}
       </AnimatePresence>
+      {!isNewChapter ? (
+        <>
+          <Canvas />
+          <Controls />
+        </>
+      ) : null}
     </div>
   );
 }
@@ -94,7 +87,7 @@ const Canvas = () => {
           opacity: isImageLoaded ? (type === "internal" ? 0.5 : 1) : 0,
         }}
         className={cn(
-          "bottom-30 absolute inset-x-0 z-10 h-full w-full",
+          "absolute -bottom-0 right-0 left-0 z-10 h-[90%] w-full",
           type === "internal" && "opacity-50",
         )}
       >
