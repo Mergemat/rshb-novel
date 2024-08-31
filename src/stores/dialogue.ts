@@ -9,7 +9,8 @@ import {
 export type DialogueState = {
   character: string;
   text: string;
-  type: "internal" | "dialogue";
+  status: "active" | "gameover";
+  type: "internal" | "dialogue" | "gameover";
   chapter: {
     current: number;
     sections: number;
@@ -38,13 +39,15 @@ export type DialogueActions = {
   previousStep: () => void;
   nextChapter: () => void;
   makeChoice: (collection: Section[]) => void;
+  reset: () => void;
 };
 
 export type DialogueStore = DialogueState & DialogueActions;
 
 export const initialDialogueStore = (): DialogueState => ({
   text: (chapters["1"][0]! as DialogueSection).dialogue[0]!.text,
-  character: "",
+  status: "active",
+  character: "Evgeny-school",
   type: "internal",
   chapter: {
     current: 1,
@@ -109,6 +112,7 @@ export const createDialogueStore = (initState: DialogueState) => {
           ...state,
           text: dialogue.text,
           character: dialogue.character,
+          status: dialogue.type === "gameover" ? "gameover" : state.status,
           type: dialogue.type,
           section: {
             current: section,
@@ -127,6 +131,8 @@ export const createDialogueStore = (initState: DialogueState) => {
       set(() => ({
         chapter: { ...get().chapter, current: get().chapter.current + 1 },
       })),
+
+    reset: () => set(() => initialDialogueStore()),
 
     makeChoice: (collection: Section[]) => {
       set((state) => ({

@@ -1,29 +1,35 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { cn } from "~/lib/utils";
 import { useDialogueStore } from "~/providers/dialogue-store-provider";
-import { Section, type DialogueMessage } from "~/types";
+import { type Section } from "~/types";
 
 export default function GamePage() {
+  const { section, character, type } = useDialogueStore((state) => state);
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-end gap-8">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="absolute inset-0 h-full w-full"
       >
         <Image
-          src="/assets/images/intro.jpg"
+          src={`/assets/environments/${section.environment}.jpg`}
           alt="env"
           fill
           className="object-cover"
         />
       </motion.div>
-      <div className="absolute inset-0 z-10 h-full w-full">
+      <div
+        className={cn(
+          "absolute inset-0 scale-90 z-10 h-full w-full",
+          type === "internal" && "opacity-50",
+        )}
+      >
         <Image
-          src="/assets/characters/intro.jpg"
+          src={`/assets/characters/${character}.png`}
           alt="char"
           fill
           className="object-cover"
@@ -35,7 +41,7 @@ export default function GamePage() {
 }
 
 const Controls = () => {
-  const { text, nextStep, choice, ...rest } = useDialogueStore(
+  const { text, nextStep, choice, status, ...rest } = useDialogueStore(
     (state) => state,
   );
 
@@ -57,13 +63,23 @@ const Controls = () => {
           >
             <p className="text-lg tracking-wide text-white">{text}</p>
           </div>
-          <Button
-            onClick={nextStep}
-            variant="secondary"
-            className="ml-auto mr-0 p-6 text-xl"
-          >
-            Дальше
-          </Button>
+          {status === "gameover" ? (
+            <Button
+              variant="secondary"
+              className="ml-auto mr-0 p-6 text-xl"
+              asChild
+            >
+              <Link href="/">На главную</Link>
+            </Button>
+          ) : (
+            <Button
+              onClick={nextStep}
+              variant="secondary"
+              className="ml-auto mr-0 p-6 text-xl"
+            >
+              Дальше
+            </Button>
+          )}
         </>
       )}
       {JSON.stringify({
