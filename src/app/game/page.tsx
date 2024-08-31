@@ -26,7 +26,7 @@ export default function GamePage() {
         <Menu className="drop-shadow" />
       </Button>
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {isNewChapter ? (
           <motion.div
             initial={{
@@ -73,7 +73,7 @@ const Canvas = () => {
     <>
       <motion.div
         transition={{ duration: 0.8 }}
-        className="absolute top-0 h-[90vh] w-full"
+        className="absolute top-0 h-full w-full"
       >
         <Image
           src={`/assets/environments/${section.environment}.jpg`}
@@ -84,19 +84,17 @@ const Canvas = () => {
       </motion.div>
       <motion.div
         animate={{
-          opacity: isImageLoaded ? (type === "internal" ? 0.5 : 1) : 0,
+          opacity: isImageLoaded ? 1 : 0,
+          filter: type === "internal" ? "brightness(0.8)" : "none",
         }}
-        className={cn(
-          "absolute bottom-40 left-0 right-0 z-10 h-[70%] w-full",
-          type === "internal" && "opacity-50",
-        )}
+        className={cn("absolute bottom-40 left-0 right-0 z-10 h-[70%] w-full")}
       >
         {character !== "Info" ? (
           <Image
             src={`/assets/characters/${character}.png`}
             alt="char"
             fill
-            className={cn("object-cover")}
+            className={cn("object-cover object-top")}
             onLoadingComplete={() => setImageLoaded(true)}
             onLoadStart={() => setImageLoaded(false)}
           />
@@ -110,7 +108,6 @@ const Controls = () => {
   const { text, character, choice, ...rest } = useDialogueStore(
     (state) => state,
   );
-  console.log(choice);
 
   return (
     <motion.div className="relative bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 py-8 drop-shadow-lg backdrop-blur-xl transition-all duration-100">
@@ -192,8 +189,8 @@ const Dialogue = () => {
       >
         <p
           className={cn(
-            "text-base tracking-wide text-white",
-            type === "internal" && "italic",
+            "text-sm sm:text-base tracking-wide text-white",
+            type === "internal" && "font-light italic",
           )}
         >
           {text}
@@ -218,11 +215,11 @@ const Dialogue = () => {
           Дальше
         </Button>
       )}
-      {JSON.stringify({
-        chapter: rest.chapter.current,
-        section: rest.section.current,
-        mesage: rest.messages.count,
-      })}
     </>
   );
 };
+//{JSON.stringify({
+//  chapter: rest.chapter.current,
+//  section: rest.section.current,
+//  mesage: rest.messages.count,
+//})}
