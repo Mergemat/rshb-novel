@@ -4,6 +4,8 @@ export const characters = {
   Alex: "Алекс",
   Host: "Ведущий",
   AlexNoName: "Мужчина",
+  Representative: "Представитель НИИ",
+  Jury: "Жюри",
 };
 
 export const chapterNames = {
@@ -13,4 +15,4 @@ export const chapterNames = {
   4: "Академия Инноваторов и Знакомство с РСХБ",
   5: "Акселератор РСХБ и Новые Горизонты",
   6: "Успешный успех",
-}
+};
