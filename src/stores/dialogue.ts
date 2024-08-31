@@ -79,12 +79,12 @@ export const createDialogueStore = (initState: DialogueState) => {
         let chapterSection =
           chapters[state.chapter.current as keyof typeof chapters][section];
 
-        console.log(state.chapter.collection);
         if (state.chapter.collection) {
           chapterSection = state.chapter.collection[section];
         }
 
         if (chapterSection?.type === "choice") {
+          console.log("choice", chapterSection.options);
           return {
             ...state,
             choice: {
@@ -97,6 +97,13 @@ export const createDialogueStore = (initState: DialogueState) => {
         const sectionMessages = chapterSection?.dialogue;
 
         const dialogue = sectionMessages![messageCount]!;
+
+        console.log({
+          chapter: state.chapter.current,
+          section,
+          messageCount,
+          collection: state.chapter.collection,
+        });
 
         return {
           ...state,
@@ -122,7 +129,6 @@ export const createDialogueStore = (initState: DialogueState) => {
       })),
 
     makeChoice: (collection: Section[]) => {
-      console.log(collection);
       set((state) => ({
         ...state,
         chapter: {
@@ -136,7 +142,7 @@ export const createDialogueStore = (initState: DialogueState) => {
         messages: {
           ...state.messages,
           current: (collection[0] as DialogueSection).dialogue,
-          count: 0,
+          count: -1,
         },
         choice: {
           active: false,
