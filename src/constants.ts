@@ -7,6 +7,7 @@ export const characters = {
   AlexNoName: "Мужчина",
   Representative: "Представитель НИИ",
   Jury: "Жюри",
+  Mikhail: "Михаил",
 };
 
 export const chapterNames = {

@@ -31,7 +31,7 @@ export default function AssetLoader() {
 
   return (
     <>
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
+      <div className="relative flex h-full w-full flex-col items-center justify-center gap-8">
         <span className="flex w-3/4 flex-col items-center text-xl font-semibold">
           {characterProgress}
           <Progress value={characterProgressPercentage} />
