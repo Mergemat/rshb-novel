@@ -8,6 +8,8 @@ export const characters = {
   Representative: "Представитель НИИ",
   Jury: "Жюри",
   Mikhail: "Михаил",
+  Natalia: "Наталья",
+  Natasha: "Наташа",
 };
 
 export const chapterNames = {

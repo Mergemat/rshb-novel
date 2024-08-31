@@ -174,12 +174,12 @@ export const candidateChoice: Section = {
         },
         {
           type: "dialogue",
-          environment: "newOffice",
+          environment: "badOffice",
           dialogue: confrontation,
         },
         {
           type: "dialogue",
-          environment: "newOffice",
+          environment: "badOffice2",
           dialogue: minusMisha,
         },
       ],
