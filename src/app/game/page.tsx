@@ -110,7 +110,7 @@ const Controls = () => {
   );
 
   return (
-    <motion.div className="relative bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 py-8 drop-shadow-lg backdrop-blur-xl transition-all duration-100">
+    <motion.div className="relative bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 py-8 drop-shadow-lg backdrop-blur-lg transition-all duration-100">
       {character !== "Info" ? (
         <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-white transition-all duration-100">
           {characters[character.split("-")[0] as keyof typeof characters]}
