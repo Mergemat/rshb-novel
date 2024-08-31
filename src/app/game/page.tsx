@@ -6,18 +6,13 @@ import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import { useDialogueStore } from "~/providers/dialogue-store-provider";
 import { type Section } from "~/types";
-import { atom, useAtomValue, useSetAtom } from "jotai";
-import { useEffect } from "react";
+import { atom, useAtom, useAtomValue } from "jotai";
 
 const imageLoaded = atom(false);
 
 export default function GamePage() {
   const { section, character, type } = useDialogueStore((state) => state);
-  const setImageLoaded = useSetAtom(imageLoaded);
-
-  useEffect(() => {
-    setImageLoaded(false);
-  }, [character, setImageLoaded]);
+  const [isImageLoaded, setImageLoaded] = useAtom(imageLoaded);
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-end gap-8">
@@ -32,20 +27,26 @@ export default function GamePage() {
           className="object-cover"
         />
       </motion.div>
-      <div
+      <motion.div
+        animate={{
+          opacity: isImageLoaded ? (type === "internal" ? 0.5 : 1) : 0,
+        }}
         className={cn(
           "bottom-30 absolute inset-x-0 z-10 h-full w-full",
           type === "internal" && "opacity-50",
         )}
       >
-        <Image
-          src={`/assets/characters/${character}.png`}
-          alt="char"
-          fill
-          className="object-cover"
-          onLoad={() => setImageLoaded(true)}
-        />
-      </div>
+        {character !== "Info" ? (
+          <Image
+            src={`/assets/characters/${character}.png`}
+            alt="char"
+            fill
+            className={cn("object-cover")}
+            onLoadingComplete={() => setImageLoaded(true)}
+            onLoadStart={() => setImageLoaded(false)}
+          />
+        ) : null}
+      </motion.div>
       <Controls />
     </div>
   );
@@ -59,10 +60,10 @@ const Controls = () => {
   const isImageLoaded = useAtomValue(imageLoaded);
 
   return (
-    <motion.div className="z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 drop-shadow-lg backdrop-blur-xl transition-all">
+    <motion.div className="z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 drop-shadow-lg backdrop-blur-xl transition-all duration-100">
       {choice.active ? (
         <>
-          <p className="h-52 rounded-lg bg-accent/40 p-1 text-base tracking-wide text-white">
+          <p className="h-fit rounded-lg bg-accent/40 p-4 text-base tracking-wide text-white transition-all duration-100">
             {text}
           </p>
 
@@ -72,7 +73,7 @@ const Controls = () => {
         <>
           <div
             id="dialogue-text"
-            className="h-72 w-full rounded-lg bg-accent/40 p-4"
+            className="h-fit w-full rounded-lg bg-accent/40 p-4 transition-all duration-100"
           >
             <p className="text-base tracking-wide text-white">{text}</p>
           </div>
