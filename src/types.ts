@@ -1,7 +1,7 @@
 export type DialogueMessage = {
   character: string;
   text: string;
-  type: "internal" | "dialogue";
+  type: "internal" | "dialogue" | "gameover";
 };
 
 export type DialogueSection = {
