@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Button } from "~/components/ui/button";
 
 export default function Caption() {
@@ -69,7 +70,9 @@ export default function Caption() {
         }}
         className="z-10 flex flex-col items-center justify-center p-4"
       >
-        <Button className="p-8 text-2xl">Начать игру</Button>
+        <Button className="p-8 text-2xl">
+          <Link href="/game">Начать игру</Link>
+        </Button>
       </motion.div>
     </>
   );

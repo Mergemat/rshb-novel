@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { DialogueStoreProvider } from "~/providers/dialogue-store-provider";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -17,11 +18,13 @@ export default function RootLayout({
       lang="ru"
       className={`${GeistSans.variable} dark bg-background text-foreground`}
     >
-      <body className="flex justify-center">
-        <main className="flex h-screen w-full max-w-xl bg-accent">
-          {children}
-        </main>
-      </body>
+      <DialogueStoreProvider>
+        <body className="flex justify-center">
+          <main className="flex h-screen w-full max-w-xl bg-accent">
+            {children}
+          </main>
+        </body>
+      </DialogueStoreProvider>
     </html>
   );
 }
