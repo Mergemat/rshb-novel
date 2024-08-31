@@ -15,5 +15,6 @@ export type Section =
   | DialogueSection
   | {
       type: "choice";
+      text?: string;
       options: { text: string; sections: Section[] }[];
     };

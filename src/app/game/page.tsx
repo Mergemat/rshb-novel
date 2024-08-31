@@ -110,17 +110,20 @@ const Controls = () => {
   const { text, character, choice, ...rest } = useDialogueStore(
     (state) => state,
   );
+  console.log(choice);
 
   return (
     <motion.div className="fixed bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 py-8 drop-shadow-lg backdrop-blur-xl transition-all duration-100">
-      <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-white transition-all duration-100">
-        {characters[character.split("-")[0] as keyof typeof characters]}
-      </p>
+      {character !== "Info" ? (
+        <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-white transition-all duration-100">
+          {characters[character.split("-")[0] as keyof typeof characters]}
+        </p>
+      ) : null}
 
       {choice.active ? (
         <>
           <p className="h-fit rounded-lg bg-accent/40 p-4 text-base tracking-wide text-white transition-all duration-100">
-            {text}
+            {choice.text ?? text}
           </p>
 
           <Choice options={choice.options!} />

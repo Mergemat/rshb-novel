@@ -27,6 +27,7 @@ export type DialogueState = {
   choice:
     | {
         active: true;
+        text?: string;
         options?: { text: string; sections: Section[] }[];
       }
     | {
@@ -92,6 +93,7 @@ export const createDialogueStore = (initState: DialogueState) => {
             ...state,
             choice: {
               active: true,
+              text: chapterSection.text,
               options: chapterSection.options,
             },
           };
