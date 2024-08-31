@@ -13,8 +13,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="ru"
+      className={`${GeistSans.variable} dark bg-background text-foreground`}
+    >
+      <body className="flex justify-center">
+        <main className="flex h-screen w-full max-w-xl bg-accent">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
