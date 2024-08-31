@@ -24,7 +24,7 @@ export default function GamePage() {
       </motion.div>
       <div
         className={cn(
-          "absolute inset-0 scale-90 z-10 h-full w-full",
+          "absolute inset-0 z-10 h-full w-full scale-90",
           type === "internal" && "opacity-50",
         )}
       >
@@ -46,10 +46,10 @@ const Controls = () => {
   );
 
   return (
-    <motion.div className="z-10 flex h-96 w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-4 drop-shadow-lg backdrop-blur-xl transition-all">
+    <motion.div className="z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 drop-shadow-lg backdrop-blur-xl transition-all">
       {choice.active ? (
         <>
-          <p className="h-40 rounded-lg bg-accent/40 p-2 text-base tracking-wide text-white">
+          <p className="h-52 rounded-lg bg-accent/40 p-1 text-base tracking-wide text-white">
             {text}
           </p>
 
@@ -59,9 +59,9 @@ const Controls = () => {
         <>
           <div
             id="dialogue-text"
-            className="h-64 w-full rounded-lg bg-accent/40 p-4"
+            className="h-72 w-full rounded-lg bg-accent/40 p-4"
           >
-            <p className="text-lg tracking-wide text-white">{text}</p>
+            <p className="text-base tracking-wide text-white">{text}</p>
           </div>
           {status === "gameover" ? (
             <Button
