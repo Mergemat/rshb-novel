@@ -73,7 +73,7 @@ const Canvas = () => {
     <>
       <motion.div
         transition={{ duration: 0.8 }}
-        className="absolute inset-0 h-full w-full"
+        className="absolute top-0 h-[90vh] w-full"
       >
         <Image
           src={`/assets/environments/${section.environment}.jpg`}
@@ -87,7 +87,7 @@ const Canvas = () => {
           opacity: isImageLoaded ? (type === "internal" ? 0.5 : 1) : 0,
         }}
         className={cn(
-          "absolute -bottom-0 right-0 left-0 z-10 h-[90%] w-full",
+          "absolute -bottom-0 left-0 right-0 z-10 h-[90%] w-full",
           type === "internal" && "opacity-50",
         )}
       >
@@ -112,7 +112,7 @@ const Controls = () => {
   );
 
   return (
-    <motion.div className="relative z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 py-8 drop-shadow-lg backdrop-blur-xl transition-all duration-100">
+    <motion.div className="fixed bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 py-8 drop-shadow-lg backdrop-blur-xl transition-all duration-100">
       <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-white transition-all duration-100">
         {characters[character.split("-")[0] as keyof typeof characters]}
       </p>
