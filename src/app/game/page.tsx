@@ -10,6 +10,7 @@ import MenuButton from "./_components/menu-button";
 import { Controls } from "./_components/controls";
 import { imageLoaded } from "./store";
 import { maxChaptersAtom } from "~/stores/chapters";
+import SoundButton from "./_components/sound-button";
 
 export default function GamePage() {
   const { isNewChapter, chapter } = useDialogueStore((state) => state);
@@ -28,6 +29,7 @@ export default function GamePage() {
 
       {!isNewChapter ? (
         <>
+          <SoundButton />
           <Canvas />
           <Controls />
         </>
