@@ -22,7 +22,7 @@ export default function RootLayout({
     >
       <DialogueStoreProvider>
         <body className="flex h-screen justify-center">
-          <main className="flex w-full max-w-xl bg-accent">{children}</main>
+          <main className="flex w-full max-w-xl">{children}</main>
         </body>
       </DialogueStoreProvider>
     </html>
