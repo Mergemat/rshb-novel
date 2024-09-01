@@ -25,7 +25,7 @@ export default function AssetLoader() {
       characterProgress === characterImages.length &&
       environmentProgress === environmentImages.length
     ) {
-      router.push("/intro");
+      router.push("/disclaimer");
     }
   }, [characterProgress, environmentProgress, router]);
 
