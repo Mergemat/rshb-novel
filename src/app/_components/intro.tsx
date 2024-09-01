@@ -13,7 +13,7 @@ export default function Intro() {
   }, [reset]);
 
   return (
-    <div className="relative overflow-hidden flex h-full w-full flex-col items-center justify-end gap-8 pb-[20%]">
+    <div className="relative flex h-full w-full flex-col items-center justify-end gap-8 overflow-hidden pb-[20%]">
       <div className="absolute inset-0 h-full w-full">
         <Image
           src="/assets/images/intro.jpg"

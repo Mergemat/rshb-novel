@@ -16,9 +16,7 @@ export default function Caption() {
           paddingLeft: "2rem",
           paddingRight: "2rem",
         }}
-        transition={{
-          
-        }}
+        transition={{}}
         className="z-10 flex w-fit flex-col items-center justify-center rounded-xl border-2 border-white/20 bg-accent/30 p-4 px-8 drop-shadow-lg backdrop-blur-xl"
       >
         <motion.h1
@@ -30,9 +28,7 @@ export default function Caption() {
             opacity: 1,
             scale: 1,
           }}
-          transition={{
-            
-          }}
+          transition={{}}
           className="text-6xl font-bold text-white"
         >
           АГРОТЕХ
@@ -47,7 +43,6 @@ export default function Caption() {
             scale: 1,
           }}
           transition={{
-            
             delay: 0.2,
           }}
           className="text-3xl font-semibold text-white/80"
@@ -65,7 +60,6 @@ export default function Caption() {
           y: 0,
         }}
         transition={{
-          
           delay: 0.2,
         }}
         className="z-10 flex flex-col items-center justify-center p-4"
