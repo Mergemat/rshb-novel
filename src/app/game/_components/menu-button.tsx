@@ -68,7 +68,9 @@ function Menu() {
           asChild
           className="w-full justify-start py-6 text-lg font-normal"
         >
-          <Link href="/intro">На главную</Link>
+          <Link href="/intro" onClick={() => setIsOpen(false)}>
+            На главную
+          </Link>
         </Button>
       </motion.div>
       <AnimatePresence>

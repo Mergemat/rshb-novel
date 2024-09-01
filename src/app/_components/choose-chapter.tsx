@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
+import { useAtomValue } from "jotai";
 import { X } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { chapterNames } from "~/constants";
+import { maxChaptersAtom } from "~/stores/chapters";
 
 export default function ChooseChapter({
   onClose,
@@ -10,6 +12,8 @@ export default function ChooseChapter({
   onClose: () => void;
   onChoose: (chapter: number) => void;
 }) {
+  const maxChapters = useAtomValue(maxChaptersAtom);
+
   return (
     <motion.div
       initial={{
@@ -39,6 +43,7 @@ export default function ChooseChapter({
             variant="outline"
             className="w-full justify-start py-6 text-lg font-normal"
             onClick={() => onChoose(Number(chapter))}
+            disabled={(maxChapters as number) < Number(chapter)}
           >
             {chapter} •{" "}
             {chapterNames[chapter as unknown as keyof typeof chapterNames]}

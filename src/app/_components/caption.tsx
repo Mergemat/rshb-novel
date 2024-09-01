@@ -1,10 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
 import { Button } from "~/components/ui/button";
+import { useDialogueStore } from "~/providers/dialogue-store-provider";
+import ChooseChapter from "./choose-chapter";
+import { useRouter } from "next/navigation";
 
 export default function Caption() {
+  const [isChapterChooserOpen, setIsChapterChooserOpen] = useState(false);
+  const router = useRouter();
+
+  const { loadChapter } = useDialogueStore((state) => state);
+
+  const onChooseHandler = (chapter: number) => {
+    loadChapter(chapter);
+    setIsChapterChooserOpen(false);
+    router.push("/game");
+  };
+
   return (
     <>
       <motion.div
@@ -16,8 +31,7 @@ export default function Caption() {
           paddingLeft: "2rem",
           paddingRight: "2rem",
         }}
-        transition={{}}
-        className="z-10 flex w-fit flex-col items-center justify-center rounded-xl border-2 border-white/20 bg-accent/30 p-4 px-8 drop-shadow-lg backdrop-blur-xl"
+        className="z-10 flex w-fit flex-col items-center justify-center rounded-xl border-2 border-white/20 bg-accent/20 p-4 px-8 backdrop-blur-xl"
       >
         <motion.h1
           initial={{
@@ -28,7 +42,6 @@ export default function Caption() {
             opacity: 1,
             scale: 1,
           }}
-          transition={{}}
           className="text-6xl font-bold text-white"
         >
           АГРОТЕХ
@@ -50,24 +63,26 @@ export default function Caption() {
           ПУТЬ К УСПЕХУ
         </motion.h2>
       </motion.div>
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 100,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          delay: 0.2,
-        }}
-        className="z-10 flex flex-col items-center justify-center p-4"
-      >
+      <motion.div className="z-10 flex flex-col items-center justify-center p-4">
         <Button className="p-8 text-2xl">
           <Link href="/game">Начать игру</Link>
         </Button>
+        <Button
+          onMouseDown={() => setIsChapterChooserOpen(true)}
+          variant="outline"
+          className="mt-4 bg-accent/40 p-6 text-xl"
+        >
+          Выбор главы
+        </Button>
       </motion.div>
+      <AnimatePresence>
+        {isChapterChooserOpen ? (
+          <ChooseChapter
+            onClose={() => setIsChapterChooserOpen(false)}
+            onChoose={onChooseHandler}
+          />
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }
