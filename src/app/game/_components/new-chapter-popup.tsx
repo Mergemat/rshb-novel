@@ -22,7 +22,7 @@ export default function NewChapterPopup() {
           exit={{
             opacity: 0,
           }}
-          className="absolute top-1/2 z-40 mx-4 flex w-full -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-accent/20 px-8 py-4 drop-shadow-lg backdrop-blur-xl"
+          className="absolute top-1/2 z-40 mx-4 flex w-full -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-card/20 px-8 py-4 drop-shadow-lg backdrop-blur-xl"
         >
           <h1 className="text-center text-xl font-semibold text-white">
             Глава {chapter.current}

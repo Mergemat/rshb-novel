@@ -31,7 +31,7 @@ export default function Caption() {
           paddingLeft: "2rem",
           paddingRight: "2rem",
         }}
-        className="z-10 flex w-fit flex-col items-center justify-center rounded-xl border-2 border-white/20 bg-accent/20 p-4 px-8 backdrop-blur-xl"
+        className="z-10 flex w-fit flex-col items-center justify-center rounded-xl border-2 border-white/20 bg-card/20 p-4 px-8 backdrop-blur-xl"
       >
         <motion.h1
           initial={{
@@ -70,7 +70,7 @@ export default function Caption() {
         <Button
           onMouseDown={() => setIsChapterChooserOpen(true)}
           variant="outline"
-          className="mt-4 bg-accent/40 p-6 text-xl"
+          className="mt-4 bg-card/40 p-6 text-xl"
         >
           Выбор главы
         </Button>

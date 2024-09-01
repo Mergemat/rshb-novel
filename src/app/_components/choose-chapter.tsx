@@ -28,11 +28,11 @@ export default function ChooseChapter({
           duration: 0.1,
         },
       }}
-      className="absolute top-0 z-40 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/30 p-2 py-8 pt-16 drop-shadow-lg backdrop-blur-xl"
+      className="absolute top-0 z-40 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-card/30 p-2 py-8 pt-16 drop-shadow-lg backdrop-blur-xl"
     >
       <Button
         variant="ghost"
-        className="absolute right-4 top-4 z-20 rounded-sm border-white/10 bg-accent/40 text-white drop-shadow backdrop-blur-sm"
+        className="absolute right-4 top-4 z-20 rounded-sm border-white/10 bg-card/40 text-white drop-shadow backdrop-blur-sm"
         onMouseDown={onClose}
       >
         <X />
