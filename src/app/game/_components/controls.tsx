@@ -23,7 +23,7 @@ export const Controls = () => {
             exit={{
               y: 350,
             }}
-            className="relative z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/30 p-2 py-8 backdrop-blur-lg"
+            className="relative z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-card/30 p-2 py-8 backdrop-blur-lg"
           >
             <CharacterName />
             <Choice />
@@ -42,7 +42,7 @@ const CharacterName = () => {
   if (character === "Info") return null;
 
   return (
-    <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-white duration-100">
+    <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-primary-foreground duration-100">
       {characters[character.split("-")[0] as keyof typeof characters]}
     </p>
   );
@@ -55,7 +55,7 @@ const Choice = () => {
 
   return (
     <>
-      <p className="h-fit rounded-lg bg-accent/40 p-4 text-base tracking-wide text-white duration-100">
+      <p className="h-fit rounded-lg bg-card/40 p-4 text-base tracking-wide text-white duration-100">
         {choice.text ?? text}
       </p>
 
@@ -118,7 +118,7 @@ const DialogueText = () => {
   return (
     <div
       id="dialogue-text"
-      className="h-fit w-full rounded-lg bg-accent/50 p-4 duration-100"
+      className="h-fit w-full rounded-lg bg-card/50 p-4 duration-100"
     >
       <p
         className={cn(
@@ -140,7 +140,7 @@ const GameOver = () => {
   if (type !== "gameover") return null;
 
   return (
-    <motion.div className="absolute inset-0 flex items-center justify-center bg-accent/30 px-2">
+    <motion.div className="absolute inset-0 flex items-center justify-center bg-card/30 px-2">
       <motion.div
         initial={{
           scale: 0.8,
@@ -148,12 +148,12 @@ const GameOver = () => {
         animate={{
           scale: 1,
         }}
-        className="z-10 flex w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-accent/30 p-2 py-4 backdrop-blur-lg"
+        className="z-10 flex w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-card/30 p-2 py-4 backdrop-blur-lg"
       >
         <p className="text-xl font-bold">GAME OVER</p>
         <div
           id="dialogue-text"
-          className="h-fit w-full rounded-lg bg-accent/50 p-4 duration-100"
+          className="h-fit w-full rounded-lg bg-card/50 p-4 duration-100"
         >
           <p
             className={cn(

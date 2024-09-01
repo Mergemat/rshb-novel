@@ -19,7 +19,7 @@ export default function MenuButton() {
         onMouseDown={() => setIsOpen(true)}
         variant="link"
         size="icon"
-        className="absolute left-4 top-4 z-20 rounded-sm border-white/10 bg-accent/40 text-white drop-shadow backdrop-blur-sm"
+        className="absolute left-4 top-4 z-20 rounded-sm border-white/10 bg-card/40 text-white drop-shadow backdrop-blur-sm"
       >
         <MenuIcon className="drop-shadow" />
       </Button>
@@ -44,13 +44,13 @@ function Menu() {
     <>
       <motion.div
         {...animation.menu}
-        className="absolute left-0 right-0 top-0 z-40 flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-white/20 bg-accent/30 px-4 py-4 drop-shadow-lg backdrop-blur-xl"
+        className="absolute left-0 right-0 top-0 z-40 flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-white/20 bg-card/30 px-4 py-4 drop-shadow-lg backdrop-blur-xl"
       >
         <div className="mb-8 flex w-full items-center justify-end">
           <Button
             onMouseDown={() => setIsOpen(false)}
             variant="ghost"
-            className="absolute right-4 top-4 z-20 rounded-sm border-white/10 bg-accent/40 text-white drop-shadow backdrop-blur-sm"
+            className="absolute right-4 top-4 z-20 rounded-sm border-white/10 bg-card/40 text-white drop-shadow backdrop-blur-sm"
             size="icon"
           >
             <X />
