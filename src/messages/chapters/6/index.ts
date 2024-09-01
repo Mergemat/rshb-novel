@@ -1,5 +1,4 @@
-import { chown } from "fs";
-import { DialogueMessage, Section } from "~/types";
+import { type DialogueMessage, type Section } from "~/types";
 
 const agroCode: DialogueMessage[] = [
   {

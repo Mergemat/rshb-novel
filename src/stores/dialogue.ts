@@ -80,6 +80,7 @@ export const createDialogueStore = (initState: DialogueState) => {
         let section = state.section.current;
         let messageCount = state.messages.count + 1;
 
+        console.log(state.messages);
         if (messageCount >= state.messages.current.length) {
           section += 1;
           messageCount = 0;
@@ -109,7 +110,7 @@ export const createDialogueStore = (initState: DialogueState) => {
           !sectionMessages ||
           sectionMessages[messageCount - 1]?.endOfChapter
         ) {
-          return {
+          const newState = {
             ...state,
             isNewChapter: true,
             endOfGame: false,
@@ -125,13 +126,16 @@ export const createDialogueStore = (initState: DialogueState) => {
             messages: {
               ...state.messages,
               current: (
-                chapters[(state.chapter.current + 1) as keyof typeof chapters][
-                  section
-                ]! as DialogueSection
+                chapters[
+                  (state.chapter.current + 1) as keyof typeof chapters
+                ][0]! as DialogueSection
               ).dialogue,
               count: 0,
             },
           };
+          console.log(newState, newState.chapter.current, section);
+          console.log();
+          return newState;
         }
 
         const dialogue = sectionMessages[messageCount]!;
