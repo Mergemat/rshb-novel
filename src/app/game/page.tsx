@@ -9,9 +9,17 @@ import NewChapterPopup from "./_components/new-chapter-popup";
 import MenuButton from "./_components/menu-button";
 import { Controls } from "./_components/controls";
 import { imageLoaded } from "./store";
+import { maxChaptersAtom } from "~/stores/chapters";
 
 export default function GamePage() {
-  const { isNewChapter } = useDialogueStore((state) => state);
+  const { isNewChapter, chapter } = useDialogueStore((state) => state);
+  const [maxChapters, setMaxChapters] = useAtom(maxChaptersAtom);
+
+  useEffect(() => {
+    if (isNewChapter && (maxChapters as number) < chapter.current) {
+      setMaxChapters(chapter.current);
+    }
+  }, [chapter, isNewChapter, maxChapters, setMaxChapters]);
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-end gap-8">
