@@ -3,6 +3,7 @@ export type DialogueMessage = {
   text: string;
   type: "internal" | "dialogue" | "gameover";
   endOfChapter?: boolean;
+  endOfGame?: boolean;
 };
 
 export type DialogueSection = {

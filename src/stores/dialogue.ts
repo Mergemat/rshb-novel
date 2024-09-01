@@ -1,5 +1,4 @@
 import { createStore } from "zustand/vanilla";
-import { initChapters } from "~/constants";
 import { chapters } from "~/messages";
 import {
   type Section,
@@ -13,6 +12,7 @@ export type DialogueState = {
   status: "active" | "gameover";
   type: "internal" | "dialogue" | "gameover";
   isNewChapter: boolean;
+  endOfGame: boolean;
   loadedChapter: boolean;
   chapter: {
     current: number;
@@ -51,6 +51,7 @@ export type DialogueStore = DialogueState & DialogueActions;
 export const initialDialogueStore = (): DialogueState => ({
   text: (chapters["1"][0]! as DialogueSection).dialogue[0]!.text,
   isNewChapter: true,
+  endOfGame: false,
   status: "active",
   loadedChapter: false,
   character: "Evgeny-school",
@@ -108,15 +109,10 @@ export const createDialogueStore = (initState: DialogueState) => {
           !sectionMessages ||
           sectionMessages[messageCount - 1]?.endOfChapter
         ) {
-          console.log({
-            chapter: state.chapter.current,
-            section,
-            messageCount,
-            collection: state.chapter.collection,
-          });
           return {
             ...state,
             isNewChapter: true,
+            endOfGame: false,
             chapter: {
               ...state.chapter,
               current: state.chapter.current + 1,
@@ -142,6 +138,7 @@ export const createDialogueStore = (initState: DialogueState) => {
 
         return {
           ...state,
+          endOfGame: dialogue.endOfGame ?? false,
           text: dialogue.text,
           character: dialogue.character,
           status: dialogue.type === "gameover" ? "gameover" : state.status,
@@ -217,6 +214,8 @@ export const createDialogueStore = (initState: DialogueState) => {
         },
 
         isNewChapter: true,
+        endOfGame: false,
+
         choice: {
           active: false,
         },
