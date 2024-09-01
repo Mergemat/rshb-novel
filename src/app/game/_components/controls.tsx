@@ -98,7 +98,7 @@ const Dialogue = () => {
           asChild
           disabled={!isImageLoaded}
         >
-          <Link href="/">На главную</Link>
+          <Link href="/intro">На главную</Link>
         </Button>
       ) : (
         <>
@@ -189,7 +189,7 @@ const GameOver = () => {
           className="w-full bg-primary/10 py-6 text-xl"
           asChild
         >
-          <Link href="/">На главную</Link>
+          <Link href="/intro">На главную</Link>
         </Button>
       </motion.div>
     </motion.div>
