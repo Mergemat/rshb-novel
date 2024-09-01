@@ -1,4 +1,3 @@
-import { Progress } from "@radix-ui/react-progress";
 import { type Section, type DialogueMessage } from "~/types";
 
 const candidateA: DialogueMessage[] = [
