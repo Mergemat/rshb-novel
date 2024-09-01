@@ -179,7 +179,7 @@ export const candidateChoice: Section = {
         },
         {
           type: "dialogue",
-          environment: "badOffice2",
+          environment: "badOffice",
           dialogue: minusMisha,
         },
       ],

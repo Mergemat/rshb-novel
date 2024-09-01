@@ -117,7 +117,7 @@ export const chapter2: Section[] = [
         sections: [
           {
             type: "dialogue",
-            environment: "konkurs",
+            environment: "presentation",
             dialogue: choiceExpand,
           },
           {

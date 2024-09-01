@@ -1,8 +1,8 @@
-import { DialogueMessage, Section } from "~/types";
+import { type DialogueMessage, type Section } from "~/types";
 
 const start: DialogueMessage[] = [
   {
-    character: "Evgeny",
+    character: "Evgeny-showing",
     text: "Мы с Викой скромно поднимаем руки. Девушка со сцены заинтересованно окидывает нас взглядом и тут же продолжает:",
     type: "internal",
   },

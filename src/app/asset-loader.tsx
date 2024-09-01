@@ -113,17 +113,19 @@ const characterImages = [
 
 const environmentImages = [
   "startup.jpg",
-  "startup-maybe.jpg",
   "school.jpg",
   "rshb.jpg",
   "presentation.jpg",
+  "pitch.jpg",
+  "panOffice.jpg",
   "newOffice.jpg",
   "newLab.jpg",
   "moscow.jpg",
   "lab.jpg",
   "konkurs.jpg",
+  "invest.jpg",
   "grassLab.jpg",
+  "congrats.jpg",
   "cafe.jpg",
-  "badOffice2.png",
   "badOffice.jpg",
 ];
