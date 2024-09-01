@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { chapterNames } from "~/constants";
-import { useDialogueStore } from "~/providers/dialogue-store-provider";
 
 export default function ChooseChapter({
   onClose,
@@ -25,7 +24,7 @@ export default function ChooseChapter({
           duration: 0.1,
         },
       }}
-      className="relative z-40 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/30 p-2 py-8 pt-16 drop-shadow-lg backdrop-blur-xl"
+      className="absolute top-0 z-40 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/30 p-2 py-8 pt-16 drop-shadow-lg backdrop-blur-xl"
     >
       <Button
         variant="ghost"
