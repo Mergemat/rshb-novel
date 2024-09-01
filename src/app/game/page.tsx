@@ -1,18 +1,14 @@
 "use client";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import { useDialogueStore } from "~/providers/dialogue-store-provider";
-import { type Section } from "~/types";
-import { atom, useAtom, useAtomValue } from "jotai";
-import { characters } from "~/constants";
+import { useAtom } from "jotai";
 import { useEffect } from "react";
 import NewChapterPopup from "./_components/new-chapter-popup";
 import MenuButton from "./_components/menu-button";
-
-const imageLoaded = atom(false);
+import { Controls } from "./_components/controls";
+import { imageLoaded } from "./store";
 
 export default function GamePage() {
   const { isNewChapter } = useDialogueStore((state) => state);
@@ -75,121 +71,6 @@ const Canvas = () => {
           />
         ) : null}
       </motion.div>
-    </>
-  );
-};
-
-const Controls = () => {
-  const { text, character, choice, ...rest } = useDialogueStore(
-    (state) => state,
-  );
-
-  return (
-    <motion.div className="relative bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/30 p-2 py-8 drop-shadow-lg backdrop-blur-lg transition-all duration-100">
-      {character !== "Info" ? (
-        <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-white transition-all duration-100">
-          {characters[character.split("-")[0] as keyof typeof characters]}
-        </p>
-      ) : null}
-
-      {choice.active ? (
-        <>
-          <p className="h-fit rounded-lg bg-accent/40 p-4 text-base tracking-wide text-white transition-all duration-100">
-            {choice.text ?? text}
-          </p>
-
-          <Choice options={choice.options!} />
-        </>
-      ) : (
-        <Dialogue />
-      )}
-    </motion.div>
-  );
-};
-
-const Choice = ({
-  options,
-}: {
-  options: { text: string; sections: Section[] }[];
-}) => {
-  const { makeChoice } = useDialogueStore((state) => state);
-  const isImageLoaded = useAtomValue(imageLoaded);
-
-  return (
-    <motion.div
-      transition={{
-        staggerChildren: 0.1,
-      }}
-      initial="hidden"
-      animate="visible"
-      className="flex w-full flex-col items-center justify-center gap-4"
-    >
-      {options.map((option) => (
-        <motion.div
-          variants={{
-            hidden: { y: 20, opacity: 0 },
-            visible: {
-              y: 0,
-              opacity: 1,
-            },
-          }}
-          key={option.text}
-          className="w-full"
-        >
-          <Button
-            onClick={() => makeChoice(option.sections)}
-            variant="secondary"
-            className="w-full py-6 text-xl"
-            disabled={!isImageLoaded}
-          >
-            {option.text}
-          </Button>
-        </motion.div>
-      ))}
-    </motion.div>
-  );
-};
-
-const Dialogue = () => {
-  const { text, nextStep, status, type, ...rest } = useDialogueStore(
-    (state) => state,
-  );
-  const isImageLoaded = useAtomValue(imageLoaded);
-
-  return (
-    <>
-      <div
-        id="dialogue-text"
-        className="h-fit w-full rounded-lg bg-accent/50 p-4 transition-all duration-100"
-      >
-        <p
-          className={cn(
-            "text-base tracking-wide text-white",
-            type === "internal" && "font-light italic",
-          )}
-        >
-          {text}
-        </p>
-      </div>
-      {status === "gameover" ? (
-        <Button
-          variant="secondary"
-          className="ml-auto mr-0 p-6 text-xl"
-          disabled={!isImageLoaded}
-          asChild
-        >
-          <Link href="/">На главную</Link>
-        </Button>
-      ) : (
-        <Button
-          onClick={nextStep}
-          variant="secondary"
-          className="ml-auto mr-0 p-6 text-xl"
-          disabled={!isImageLoaded}
-        >
-          Дальше
-        </Button>
-      )}
     </>
   );
 };
