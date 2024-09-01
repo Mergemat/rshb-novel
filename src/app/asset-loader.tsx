@@ -112,6 +112,7 @@ const characterImages = [
 ];
 
 const environmentImages = [
+  "wedding.jpg",
   "startup.jpg",
   "school.jpg",
   "rshb.jpg",
@@ -125,7 +126,9 @@ const environmentImages = [
   "konkurs.jpg",
   "invest.jpg",
   "grassLab.jpg",
+  "goodLab.jpg",
   "congrats.jpg",
+  "conference.jpg",
   "cafe.jpg",
   "badOffice.jpg",
 ];
