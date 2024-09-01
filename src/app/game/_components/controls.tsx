@@ -84,22 +84,35 @@ const Choice = () => {
 };
 
 const Dialogue = () => {
-  const { nextStep, choice } = useDialogueStore((state) => state);
+  const { nextStep, choice, endOfGame } = useDialogueStore((state) => state);
   const isImageLoaded = useAtomValue(imageLoaded);
 
   if (choice.active) return null;
 
   return (
     <>
-      <DialogueText />
-      <Button
-        onClick={nextStep}
-        variant="secondary"
-        className="ml-auto mr-0 p-6 text-xl"
-        disabled={!isImageLoaded}
-      >
-        Дальше
-      </Button>
+      {endOfGame ? (
+        <Button
+          variant="secondary"
+          className="p-6 text-xl"
+          asChild
+          disabled={!isImageLoaded}
+        >
+          <Link href="/">На главную</Link>
+        </Button>
+      ) : (
+        <>
+          <DialogueText />
+          <Button
+            onClick={nextStep}
+            variant="secondary"
+            className="ml-auto mr-0 p-6 text-xl"
+            disabled={!isImageLoaded}
+          >
+            Дальше
+          </Button>
+        </>
+      )}
     </>
   );
 };
