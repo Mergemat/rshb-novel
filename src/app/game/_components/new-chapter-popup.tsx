@@ -11,28 +11,30 @@ export default function NewChapterPopup() {
   return (
     <AnimatePresence>
       {isNewChapter ? (
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{}}
-          exit={{
-            opacity: 0,
-          }}
-          className="absolute top-1/2 z-40 mx-4 flex w-full -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-card/20 px-8 py-4 drop-shadow-lg backdrop-blur-xl"
-        >
-          <h1 className="text-center text-xl font-semibold text-white">
-            Глава {chapter.current}
-          </h1>
-          <h1 className="w-full text-center text-lg font-semibold text-white">
-            {chapterNames[chapter.current as keyof typeof chapterNames]}
-          </h1>
-          <Button onMouseDown={continueChapter} className="mt-4 p-6 text-lg">
-            Продолжить
-          </Button>
+        <motion.div className="absolute inset-0 flex items-center justify-center bg-card/30 px-2">
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{}}
+            exit={{
+              opacity: 0,
+            }}
+            className="z-10 flex w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-card/30 p-2 py-4 backdrop-blur-lg"
+          >
+            <h1 className="text-center text-xl font-semibold text-white">
+              Глава {chapter.current}
+            </h1>
+            <h1 className="w-full text-center text-lg font-semibold text-white">
+              {chapterNames[chapter.current as keyof typeof chapterNames]}
+            </h1>
+            <Button onMouseDown={continueChapter} className="mt-4 p-6 text-lg">
+              Продолжить
+            </Button>
+          </motion.div>
         </motion.div>
       ) : null}
     </AnimatePresence>
