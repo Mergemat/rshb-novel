@@ -7,54 +7,21 @@ import { cn } from "~/lib/utils";
 import { useDialogueStore } from "~/providers/dialogue-store-provider";
 import { type Section } from "~/types";
 import { atom, useAtom, useAtomValue } from "jotai";
-import { Menu } from "lucide-react";
-import { chapterNames, characters } from "~/constants";
+import { characters } from "~/constants";
+import { useEffect } from "react";
+import NewChapterPopup from "./_components/new-chapter-popup";
+import MenuButton from "./_components/menu-button";
 
 const imageLoaded = atom(false);
 
 export default function GamePage() {
-  const { isNewChapter, chapter, continueChapter } = useDialogueStore(
-    (state) => state,
-  );
+  const { isNewChapter } = useDialogueStore((state) => state);
+
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-end gap-8">
-      <Button
-        variant="link"
-        size="icon"
-        className="absolute left-4 top-4 z-10 rounded-sm border-white/10 bg-accent/40 text-white drop-shadow backdrop-blur-sm"
-      >
-        <Menu className="drop-shadow" />
-      </Button>
+      <MenuButton />
+      <NewChapterPopup />
 
-      <AnimatePresence>
-        {isNewChapter ? (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              ease: "easeOut",
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            className="absolute top-1/2 z-40 mx-4 flex -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-accent/20 px-8 py-4 drop-shadow-lg backdrop-blur-xl"
-          >
-            <h1 className="text-center text-xl font-semibold text-white">
-              Глава {chapter.current}
-            </h1>
-            <h1 className="w-full text-center text-lg font-semibold text-white">
-              {chapterNames[chapter.current as keyof typeof chapterNames]}
-            </h1>
-            <Button onMouseDown={continueChapter} className="mt-4 p-6 text-lg">
-              Продолжить
-            </Button>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
       {!isNewChapter ? (
         <>
           <Canvas />
@@ -66,8 +33,16 @@ export default function GamePage() {
 }
 
 const Canvas = () => {
-  const { section, character, type } = useDialogueStore((state) => state);
+  const { section, character, type, loadedChapter } = useDialogueStore(
+    (state) => state,
+  );
   const [isImageLoaded, setImageLoaded] = useAtom(imageLoaded);
+
+  useEffect(() => {
+    if (loadedChapter) {
+      setImageLoaded(true);
+    }
+  }, [loadedChapter, setImageLoaded]);
 
   return (
     <>
@@ -110,7 +85,7 @@ const Controls = () => {
   );
 
   return (
-    <motion.div className="relative bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/20 p-2 py-8 drop-shadow-lg backdrop-blur-lg transition-all duration-100">
+    <motion.div className="relative bottom-0 z-10 flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2 border-white/20 bg-accent/30 p-2 py-8 drop-shadow-lg backdrop-blur-lg transition-all duration-100">
       {character !== "Info" ? (
         <p className="absolute -top-4 left-2 h-fit rounded-md bg-primary p-1 px-4 text-base tracking-wide text-white transition-all duration-100">
           {characters[character.split("-")[0] as keyof typeof characters]}
