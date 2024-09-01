@@ -118,7 +118,7 @@ const DialogueText = () => {
   return (
     <div
       id="dialogue-text"
-      className="h-fit w-full rounded-lg bg-card/50 p-4 duration-100"
+      className="h-fit w-full rounded-lg bg-card/80 p-4 duration-100"
     >
       <p
         className={cn(
