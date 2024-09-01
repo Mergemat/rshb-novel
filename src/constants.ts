@@ -13,6 +13,7 @@ export const characters = {
   Mikhail: "Михаил",
   Natalia: "Наталья",
   Natasha: "Наташа",
+  Scientist: "Учёный",
 };
 
 export const chapterNames = {
