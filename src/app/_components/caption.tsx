@@ -17,9 +17,9 @@ export default function Caption() {
           paddingRight: "2rem",
         }}
         transition={{
-          ease: "easeOut",
+          
         }}
-        className="z-10 flex w-fit flex-col items-center justify-center rounded-xl border-2 border-white/20 bg-accent/20 p-4 px-8 drop-shadow-lg backdrop-blur-xl"
+        className="z-10 flex w-fit flex-col items-center justify-center rounded-xl border-2 border-white/20 bg-accent/30 p-4 px-8 drop-shadow-lg backdrop-blur-xl"
       >
         <motion.h1
           initial={{
@@ -31,7 +31,7 @@ export default function Caption() {
             scale: 1,
           }}
           transition={{
-            ease: "easeOut",
+            
           }}
           className="text-6xl font-bold text-white"
         >
@@ -47,7 +47,7 @@ export default function Caption() {
             scale: 1,
           }}
           transition={{
-            ease: "easeOut",
+            
             delay: 0.2,
           }}
           className="text-3xl font-semibold text-white/80"
@@ -65,7 +65,7 @@ export default function Caption() {
           y: 0,
         }}
         transition={{
-          ease: "easeOut",
+          
           delay: 0.2,
         }}
         className="z-10 flex flex-col items-center justify-center p-4"

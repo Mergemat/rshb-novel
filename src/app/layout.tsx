@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
 
-import { GeistSans } from "geist/font/sans";
+import { Inter } from "next/font/google";
 import { type Metadata } from "next";
 import { DialogueStoreProvider } from "~/providers/dialogue-store-provider";
 
@@ -10,13 +10,15 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
+const font = Inter({ subsets: ["latin", "cyrillic", "cyrillic-ext"] });
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="ru"
-      className={`${GeistSans.variable} dark bg-background text-foreground`}
+      className={`${font.className} dark bg-background text-foreground`}
     >
       <DialogueStoreProvider>
         <body className="flex h-screen justify-center">

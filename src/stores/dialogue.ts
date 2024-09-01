@@ -1,4 +1,5 @@
 import { createStore } from "zustand/vanilla";
+import { initChapters } from "~/constants";
 import { chapters } from "~/messages";
 import {
   type Section,
@@ -12,6 +13,7 @@ export type DialogueState = {
   status: "active" | "gameover";
   type: "internal" | "dialogue" | "gameover";
   isNewChapter: boolean;
+  loadedChapter: boolean;
   chapter: {
     current: number;
     collection?: Section[];
@@ -41,6 +43,7 @@ export type DialogueActions = {
   makeChoice: (collection: Section[]) => void;
   reset: () => void;
   continueChapter: () => void;
+  loadChapter: (chapter: number) => void;
 };
 
 export type DialogueStore = DialogueState & DialogueActions;
@@ -49,6 +52,7 @@ export const initialDialogueStore = (): DialogueState => ({
   text: (chapters["1"][0]! as DialogueSection).dialogue[0]!.text,
   isNewChapter: true,
   status: "active",
+  loadedChapter: false,
   character: "Evgeny-school",
   type: "internal",
   chapter: {
@@ -179,9 +183,49 @@ export const createDialogueStore = (initState: DialogueState) => {
       }));
       get().nextStep();
     },
+
     continueChapter: () => {
       set((state) => ({ ...state, isNewChapter: false }));
       get().nextStep();
+    },
+
+    loadChapter: (chapter: number) => {
+      let chap = chapters[
+        chapter as keyof typeof chapters
+      ][0]! as DialogueSection;
+
+      if (!chap) {
+        chap = chapters[1][0]! as DialogueSection;
+      }
+
+      const dialogue = chap.dialogue[0]!;
+
+      set(() => ({
+        text: dialogue.text,
+        status: "active",
+        type: dialogue.type,
+        character: dialogue.character,
+
+        chapter: {
+          current: chapter,
+          collection: undefined,
+        },
+
+        section: {
+          current: 0,
+          environment: chap.environment,
+        },
+
+        isNewChapter: true,
+        choice: {
+          active: false,
+        },
+        loadedChapter: false,
+        messages: {
+          current: chap.dialogue,
+          count: 0,
+        },
+      }));
     },
   }));
 };
