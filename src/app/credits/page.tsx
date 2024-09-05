@@ -4,7 +4,7 @@ import { Button } from "~/components/ui/button";
 export default function Page() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-8">
-      <video autoPlay controls className="h-full w-full">
+      <video autoPlay controls playsInline className="h-full w-full">
         <source src="/credits.mp4" type="video/mp4" />
       </video>
       <Button
