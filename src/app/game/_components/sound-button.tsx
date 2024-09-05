@@ -5,12 +5,14 @@ import { Volume2, VolumeX } from "lucide-react";
 
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { useAtom } from "jotai";
+import { useDialogueStore } from "~/providers/dialogue-store-provider";
 
 const storage = createJSONStorage(() => sessionStorage);
 export const mutedSoundAtom = atomWithStorage("muted", false, storage);
 
 export default function SoundButton() {
   const [muted, setMuted] = useAtom(mutedSoundAtom);
+  const { isNewChapter } = useDialogueStore((state) => state);
 
   const soundRef = useRef<Howl>();
 
@@ -27,12 +29,12 @@ export default function SoundButton() {
   }, []);
 
   useEffect(() => {
-    if (muted) {
+    if (muted || isNewChapter) {
       soundRef.current?.fade(0.2, -1, 1000);
     } else {
       soundRef.current?.fade(-1, 0.2, 1000);
     }
-  }, [muted]);
+  }, [isNewChapter, muted]);
 
   const onMute = useCallback(() => {
     setMuted(!muted);
