@@ -98,7 +98,7 @@ const Dialogue = () => {
           asChild
           disabled={!isImageLoaded}
         >
-          <Link href="/intro">На главную</Link>
+          <Link href="/credits">К титрам</Link>
         </Button>
       ) : (
         <>
