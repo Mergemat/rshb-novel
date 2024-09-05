@@ -53,9 +53,7 @@ export default function AssetLoader() {
                 alt="char"
                 fill
                 className={"object-cover object-top"}
-                onLoadingComplete={() =>
-                  setCharacterProgress((prev) => prev + 1)
-                }
+                onLoad={() => setCharacterProgress((prev) => prev + 1)}
               />
             );
           })}
@@ -69,9 +67,7 @@ export default function AssetLoader() {
                 alt="env"
                 fill
                 className={"object-cover"}
-                onLoadingComplete={() =>
-                  setEnvironmentProgress((prev) => prev + 1)
-                }
+                onLoad={() => setEnvironmentProgress((prev) => prev + 1)}
               />
             );
           })}
