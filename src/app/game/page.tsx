@@ -26,10 +26,10 @@ export default function GamePage() {
     <div className="relative flex h-full w-full flex-col items-center justify-end gap-8">
       <MenuButton />
       <NewChapterPopup />
+      <SoundButton />
 
       {!isNewChapter ? (
         <>
-          <SoundButton />
           <Canvas />
           <Controls />
         </>
